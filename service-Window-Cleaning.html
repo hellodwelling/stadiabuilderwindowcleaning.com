@@ -18,7 +18,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="/staticfiles/landing_page_gen/tailwind.css"> -->
     <!-- <link rel="stylesheet" type="stylesheet" href="/staticfiles/landing_page_gen/tailwind.css"> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css"> -->
-    <link rel="icon" href="https://landing-page-app-hero-images.s3.amazonaws.com/media/d85d6174-95db-430d-b46a-93e88f8647ca.png" type="image/x-icon">
+    <link rel="icon" href="https://landing-page-app-hero-images.s3.amazonaws.com/media/edf84a14-243a-43b6-bafb-13a760bc811c.png" type="image/x-icon">
     <link rel="stylesheet" href="https://prophone-templates.vercel.app/assets/output.css">
       <script>!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error('Segment snippet included twice.');else{analytics.invoked=!0;analytics.methods=['trackSubmit','trackClick','trackLink','trackForm','pageview','identify','reset','group','track','ready','alias','debug','page','once','off','on','addSourceMiddleware','addIntegrationMiddleware','setAnonymousId','addDestinationMiddleware'];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement('script');t.type='text/javascript';t.async=!0;t.src='https://cdn.segment.com/analytics.js/v1/' + key + '/analytics.min.js';var n=document.getElementsByTagName('script')[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey='Z6dq7zq7CtZubdSRrh4EHjCsAasGDPiE';;analytics.SNIPPET_VERSION='4.15.3';analytics.load('Z6dq7zq7CtZubdSRrh4EHjCsAasGDPiE');analytics.page();}}();</script>  
 
@@ -69,6 +69,7 @@
     <script type="text/javascript" defer>
                     function send_sms(slug){
                         console.log('send_sms',1, slug)
+                        event.preventDefault()
                         function uuidV4() {
                             return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
                               (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -187,7 +188,6 @@
                         }
                         const getSelectedServices = () =>{
                             const allSelectedServiced = Array.from(document.querySelectorAll('[id^="contact-service"]'))
-
                             if (allSelectedServiced.length){
                                 return allSelectedServiced.filter( (x)=> x.checked
                             ).map(item => item.value).join(",");
@@ -248,11 +248,29 @@
                             return result.json();
                         })
                         .then(result => {
+                            const sendTextModalId = document.getElementById("send-text-modal")
+                            sendTextModalId.style.display = 'none'
+                            const modalId = document.getElementById("text-thank-you")
+                            modalId.style.display = 'block';
+                            return result
+                        })
+                        .catch(result => {
                             console.log(result)
-                            alert("Your message has been sent!")
-                            location.reload()
+                            alert("There was a problem sending your text. Please reach out to ProPhone.")
                         })
 
+                        setTimeout(() => {
+                            const sendTextModalId = document.getElementById("send-text-modal")
+                            const modalId = document.getElementById("text-thank-you")
+                            modalId.style.display = 'none';
+                            if (sendTextModalId.style.display === 'none') {
+                                reload()
+                            }
+                        }, 5000);
+
+                        const reload = () => {
+                            location.reload()
+                        }
 
                     }
                 
@@ -352,16 +370,17 @@
                         class="flex items-center h-full transition-all duration-200 origin-left"
                     >
                         <!-- Logo Link -->
-                        <a
-                            href="/"
+                    
+                        <a  href= " index "
                             class="flex items-center justify-center flex-shrink-0 pr-5 bg-white rounded-md  focus:ring-2 focus:outline-none ring-primary ring-opacity-75 ring-offset-2"
                         >
                             <img
                                 class="h-[80px] xl:h-[150px] scale-100 origin-left transition w-auto"
-                                src="https://landing-page-app-hero-images.s3.amazonaws.com/media/d85d6174-95db-430d-b46a-93e88f8647ca.png"
+                                src="https://landing-page-app-hero-images.s3.amazonaws.com/media/edf84a14-243a-43b6-bafb-13a760bc811c.png"
                                 alt="Brand Logo"
                             />
                         </a>
+                    
                     </div>
                     <!-- Links -->
                     <div
@@ -729,7 +748,7 @@
                             href="/"
                             class="flex items-center justify-center flex-shrink-0 bg-white rounded-b-lg focus-visible:ring focus:outline-none ring-primary"
                         >
-                            <img class="h-[80px]" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/d85d6174-95db-430d-b46a-93e88f8647ca.png" alt="Brand Logo" />
+                            <img class="h-[80px]" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/edf84a14-243a-43b6-bafb-13a760bc811c.png" alt="Brand Logo" />
                         </a>
                     </div>
                     <div class="-mr-2">
@@ -1361,12 +1380,12 @@
                                         />
                                     </svg>
                                     <p lorem="1" class="relative text-lg font-medium">
-                                        Amazing service! Walter and his team were professional and did an amazing job cleaning our windows. Would highly recommend!
+                                        Excellent service and great communication. Did a good job cleaning our exteriors. 5/5
                                     </p>
                                 </div>
                                 <footer class="flex items-center justify-between mt-8 space-x-4">
                                     <div>
-                                        <span class="block font-medium text-primary">Michael B.</span>
+                                        <span class="block font-medium text-primary">Nick O</span>
                                         <span class="block font-medium">Anchorage, AK</span>
                                     </div>
 
@@ -1451,12 +1470,12 @@
                                         />
                                     </svg>
                                     <p lorem="1" class="relative text-lg font-medium">
-                                        Excellent service and great communication. Did a good job cleaning our exteriors. 5/5
+                                        Amazing service! Walter and his team were professional and did an amazing job cleaning our windows. Would highly recommend!
                                     </p>
                                 </div>
                                 <footer class="flex items-center justify-between mt-8 space-x-4">
                                     <div>
-                                        <span class="block font-medium text-primary">Nick O</span>
+                                        <span class="block font-medium text-primary">Michael B.</span>
                                         <span class="block font-medium">Anchorage, AK</span>
                                     </div>
 
@@ -1694,7 +1713,7 @@
           <!-- Image, description and logos -->
           <div class="space-y-8 xl:col-span-1">
               
-              <img class="h-[80px]" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/d85d6174-95db-430d-b46a-93e88f8647ca.png" alt="" />
+              <img class="h-[80px]" src="https://landing-page-app-hero-images.s3.amazonaws.com/media/edf84a14-243a-43b6-bafb-13a760bc811c.png" alt="" />
               
               <p class="text-base text-gray-100">
                   Stadia Builder Window Cleaning<br/>
@@ -1764,7 +1783,7 @@
                       <ul role="list" class="mt-4 -mx-1 space-y-4">
                           <li>
                               <a
-                                  href="#"
+                                  href="index"
                                   class="p-1 text-base text-gray-100 rounded hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-opacity-75"
                                   >Home</a
                               >
@@ -1791,6 +1810,7 @@
                           
                           
                           
+                          
                           <li>
                               <a
                                   href='sitemap.xml'
@@ -1798,6 +1818,7 @@
                                   >Sitemap</a
                               >
                           </li>
+                          
                       </ul>
                   </div>
                   <!-- Services Links -->
@@ -1885,63 +1906,35 @@
                   <div class="mt-12 md:mt-0">
                       <h3 class="text-sm font-semibold tracking-wider text-gray-100 uppercase">Hours</h3>
                       <ul role="list" class="mt-4 -mx-1 space-y-4">
-                          
-                          <li>
-                              <a
-                                  href="#"
-                                  class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75"
-                                  >Sun: 8:00am - 6:00pm</a
-                              >
-                          </li>
-                          
-                          <li>
-                              <a
-                                  href="#"
-                                  class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75"
-                                  >Mon: 8:00am - 6:00pm</a
-                              >
-                          </li>
-                          
-                          <li>
-                              <a
-                                  href="#"
-                                  class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75"
-                                  >Tues: 8:00am - 6:00pm</a
-                              >
-                          </li>
-                          
-                          <li>
-                              <a
-                                  href="#"
-                                  class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75"
-                                  >Wed: 8:00am - 6:00pm</a
-                              >
-                          </li>
-                          
-                          <li>
-                              <a
-                                  href="#"
-                                  class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75"
-                                  >Thu: 8:00am - 6:00pm</a
-                              >
-                          </li>
-                          
-                          <li>
-                              <a
-                                  href="#"
-                                  class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75"
-                                  >Fri: 8:00am - 6:00pm</a
-                              >
-                          </li>
-                          
-                          <li>
-                              <a
-                                  href="#"
-                                  class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75"
-                                  >Sat: 8:00am - 6:00pm</a
-                              >
-                          </li>
-                          
+                        
+                            <li class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75">
+                                Sun:  8:00am - 6:00pm 
+                            </li>
+                        
+                            <li class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75">
+                                Mon:  8:00am - 6:00pm 
+                            </li>
+                        
+                            <li class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75">
+                                Tues:  8:00am - 6:00pm 
+                            </li>
+                        
+                            <li class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75">
+                                Wed:  8:00am - 6:00pm 
+                            </li>
+                        
+                            <li class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75">
+                                Thu:  8:00am - 6:00pm 
+                            </li>
+                        
+                            <li class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75">
+                                Fri:  8:00am - 6:00pm 
+                            </li>
+                        
+                            <li class="p-1 text-base text-gray-100 rounded  hover:text-gray-300 focus:ring-2 focus:outline-none ring-white ring-offset-2 ring-opacity-75">
+                                Sat:  8:00am - 6:00pm 
+                            </li>
+                        
                       </ul>
                   </div>
               </div>
@@ -1983,6 +1976,7 @@
             :aria-labelledby="$id('modal-title')"
             class="fixed inset-0 z-40 md:pt-8 md:pb-20"
             x-trap.noscroll.inert="contactModalOpen"
+            id="send-text-modal"
     >
         <!-- Overlay -->
         <div
@@ -2006,11 +2000,11 @@
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 @click="contactModalOpen = false"
-                class="relative flex items-center justify-center w-full h-full sm:h-max"
+                class="relative flex items-center justify-center w-full h-full"
         >
             <div
                     @click.stop
-                    class="flex flex-col w-full h-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:px-0 sm:my-0 sm:align-middle sm:max-w-3xl"
+                    class="flex flex-col w-full 2xl:h-max 2xl:mt-8 h-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:px-0 sm:my-0 sm:align-middle sm:max-w-3xl"
             >
                 <!-- Header -->
                 <div class="relative px-6 bg-white">
@@ -2031,7 +2025,7 @@
 
                 <!-- Form -->
 
-                <form class="overflow-y-scroll pb-20 sm:w-full">
+                <form class="overflow-y-auto pb-20 sm:w-full" onsubmit="send_sms('Stadia-Builder-Window-Cleaning')">
                     <div class="flex-grow h-full overflow-x-hidden overflow-y-auto">
                         <div class="h-full px-6 pb-1 mt-6 space-y-6 sm:grid sm:grid-cols-2 sm:min-w-max sm:space-x-3">
                             <!-- Full Name -->
@@ -2053,6 +2047,7 @@
                             <div>
                                 <label for="contact-phone-number" class="sr-only">Phone Number</label>
                                 <input
+                                        required
                                         type="tel"
                                         name="phone-number"
                                         id="contact-phone-number"
@@ -2112,79 +2107,79 @@
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179683"
-                                                    name="179683"
+                                                    id="contact-service-179972"
+                                                    name="179972"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Window Cleaning"
                                             />
-                                            <label for="contact-label-service-179683" class="ml-3 text-sm font-medium text-gray-700">Window Cleaning</label>
+                                            <label for="contact-label-service-179972" class="ml-3 text-sm font-medium text-gray-700">Window Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179684"
-                                                    name="179684"
+                                                    id="contact-service-179973"
+                                                    name="179973"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Driveway and Sidewalk Cleaning"
                                             />
-                                            <label for="contact-label-service-179684" class="ml-3 text-sm font-medium text-gray-700">Driveway and Sidewalk Cleaning</label>
+                                            <label for="contact-label-service-179973" class="ml-3 text-sm font-medium text-gray-700">Driveway and Sidewalk Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179685"
-                                                    name="179685"
+                                                    id="contact-service-179974"
+                                                    name="179974"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Deck and Patio Cleaning"
                                             />
-                                            <label for="contact-label-service-179685" class="ml-3 text-sm font-medium text-gray-700">Deck and Patio Cleaning</label>
+                                            <label for="contact-label-service-179974" class="ml-3 text-sm font-medium text-gray-700">Deck and Patio Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179686"
-                                                    name="179686"
+                                                    id="contact-service-179975"
+                                                    name="179975"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Roof Cleaning"
                                             />
-                                            <label for="contact-label-service-179686" class="ml-3 text-sm font-medium text-gray-700">Roof Cleaning</label>
+                                            <label for="contact-label-service-179975" class="ml-3 text-sm font-medium text-gray-700">Roof Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179687"
-                                                    name="179687"
+                                                    id="contact-service-179976"
+                                                    name="179976"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Home Softwash"
                                             />
-                                            <label for="contact-label-service-179687" class="ml-3 text-sm font-medium text-gray-700">Home Softwash</label>
+                                            <label for="contact-label-service-179976" class="ml-3 text-sm font-medium text-gray-700">Home Softwash</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179688"
-                                                    name="179688"
+                                                    id="contact-service-179977"
+                                                    name="179977"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Hardscape Cleaning"
                                             />
-                                            <label for="contact-label-service-179688" class="ml-3 text-sm font-medium text-gray-700">Hardscape Cleaning</label>
+                                            <label for="contact-label-service-179977" class="ml-3 text-sm font-medium text-gray-700">Hardscape Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179689"
-                                                    name="179689"
+                                                    id="contact-service-179978"
+                                                    name="179978"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Gutter cleaning"
                                             />
-                                            <label for="contact-label-service-179689" class="ml-3 text-sm font-medium text-gray-700">Gutter cleaning</label>
+                                            <label for="contact-label-service-179978" class="ml-3 text-sm font-medium text-gray-700">Gutter cleaning</label>
                                         </div>
                                         
                                     </div>
@@ -2197,7 +2192,6 @@
                                 <div class='sm:flex-grow'>
                                     <label for="contact-concern" class="sr-only">How can we help you?</label>
                                     <textarea
-                                            required
                                             id="contact-concern"
                                             name="concern"
                                             rows="4"
@@ -2216,79 +2210,79 @@
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179683"
-                                                    name="179683"
+                                                    id="contact-service-179972"
+                                                    name="179972"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Window Cleaning"
                                             />
-                                            <label for="contact-label-service-179683" class="ml-3 text-sm font-medium text-gray-700">Window Cleaning</label>
+                                            <label for="contact-label-service-179972" class="ml-3 text-sm font-medium text-gray-700">Window Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179684"
-                                                    name="179684"
+                                                    id="contact-service-179973"
+                                                    name="179973"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Driveway and Sidewalk Cleaning"
                                             />
-                                            <label for="contact-label-service-179684" class="ml-3 text-sm font-medium text-gray-700">Driveway and Sidewalk Cleaning</label>
+                                            <label for="contact-label-service-179973" class="ml-3 text-sm font-medium text-gray-700">Driveway and Sidewalk Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179685"
-                                                    name="179685"
+                                                    id="contact-service-179974"
+                                                    name="179974"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Deck and Patio Cleaning"
                                             />
-                                            <label for="contact-label-service-179685" class="ml-3 text-sm font-medium text-gray-700">Deck and Patio Cleaning</label>
+                                            <label for="contact-label-service-179974" class="ml-3 text-sm font-medium text-gray-700">Deck and Patio Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179686"
-                                                    name="179686"
+                                                    id="contact-service-179975"
+                                                    name="179975"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Roof Cleaning"
                                             />
-                                            <label for="contact-label-service-179686" class="ml-3 text-sm font-medium text-gray-700">Roof Cleaning</label>
+                                            <label for="contact-label-service-179975" class="ml-3 text-sm font-medium text-gray-700">Roof Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179687"
-                                                    name="179687"
+                                                    id="contact-service-179976"
+                                                    name="179976"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Home Softwash"
                                             />
-                                            <label for="contact-label-service-179687" class="ml-3 text-sm font-medium text-gray-700">Home Softwash</label>
+                                            <label for="contact-label-service-179976" class="ml-3 text-sm font-medium text-gray-700">Home Softwash</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179688"
-                                                    name="179688"
+                                                    id="contact-service-179977"
+                                                    name="179977"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Hardscape Cleaning"
                                             />
-                                            <label for="contact-label-service-179688" class="ml-3 text-sm font-medium text-gray-700">Hardscape Cleaning</label>
+                                            <label for="contact-label-service-179977" class="ml-3 text-sm font-medium text-gray-700">Hardscape Cleaning</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-179689"
-                                                    name="179689"
+                                                    id="contact-service-179978"
+                                                    name="179978"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Gutter cleaning"
                                             />
-                                            <label for="contact-label-service-179689" class="ml-3 text-sm font-medium text-gray-700">Gutter cleaning</label>
+                                            <label for="contact-label-service-179978" class="ml-3 text-sm font-medium text-gray-700">Gutter cleaning</label>
                                         </div>
                                         
                                     </div>
@@ -2300,47 +2294,88 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="flex items-center justify-center w-full">
+                        <button     class="
+                                    py-2.5
+                                    w-4/5
+                                    fixed
+                                    bottom
+                                    text-sm
+                                    font-medium
+                                    transition
+                                    border-2 border-transparent
+                                    rounded-md
+                                    bg-primary
+                                    text-primary-foreground
+                                    focus:outline-none
+                                    hover:bg-primary-darker
+                                    bg-primar
+                                    focus-visible:ring-2
+                                    ring-primary ring-opacity-75 ring-offset-2"
+                                    style="
+                                    position:absolute;
+                                    left: 50%;
+                                    bottom: 0;
+                                    transform: translate(-50%, -50%);
+                                    margin-top: 0;
+                                    margin-bottom: 0">Send
+                        </button>
+                    </div>
                 </form>
-                <div class="flex
-                                items-center
-                                justify-center
-                                w-full
-                            "
-                     onclick="send_sms('Stadia-Builder-Window-Cleaning')"
-                >
-                    <button class="
-                                py-2.5
-                                w-4/5
-                                fixed
-                                bottom
-                                text-sm
-                                font-medium
-                                transition
-                                border-2 border-transparent
-                                rounded-md
-                                bg-primary
-                                text-primary-foreground
-                                focus:outline-none
-                                hover:bg-primary-darker
-                                bg-primar
-                                focus-visible:ring-2
-                                ring-primary ring-opacity-75 ring-offset-2" 
-                                style="
-                                position:absolute;
-                                left: 50%;
-                                bottom: 0;
-                                transform: translate(-50%, -50%);
-                                margin-top: 0;
-                                margin-bottom: 0"> Send
-                    </button>
-                </div>
 
 
             </div>
         </div>
     </div>
 </template>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = Array.from(
+            document.querySelectorAll('input[name=email], input[name=phone-number]')
+        )
+
+        const inputListener = e => {
+            inputs
+                .filter(i => i !== e.target)
+                .forEach(i => (i.required = !e.target.value.length))
+        }
+
+        inputs.forEach(i => i.addEventListener('input', inputListener))
+    })
+</script>
+<div
+	class="fixed top-36 inset-x-0 z-50 mx-auto p-4 border w-96 shadow-lg rounded-md bg-white backdrop-blur-sm"
+    id="text-thank-you"
+    style="display: none"
+>
+	<div class="mt-3 text-center">
+		<div
+			class="mx-auto mb-3 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
+		>
+			<svg
+				class="h-6 w-6 text-green-600"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M5 13l4 4L19 7"
+				></path>
+			</svg>
+		</div>
+		<h3 class="text-lg leading-6 font-medium text-gray-900">Thank you!</h3>
+		<div class="mt-1 px-7 py-3">
+			<p class="text-sm text-gray-500">
+				Your message was sent successfully. We’ll send you a text or give you a call soon.
+			</p>
+		</div>
+	</div>
+</div>
 <!-- Modal -->
 <template x-teleport="body">
     <div x-show="reviewModalOpen" @keydown.escape.prevent.stop="reviewModalOpen = false" role="dialog" aria-modal="true" x-id="['modal-title']" :aria-labelledby="$id('modal-title')" class="fixed inset-0 z-40 pt-8 pb-20" x-trap.noscroll.inert="reviewModalOpen">
